@@ -1,0 +1,48 @@
+dist: xenial
+sudo: true
+before_install:
+  - sudo apt-get update -qq
+  - sudo apt-get install -qq build-essential gettext python-dev zlib1g-dev libpq-dev xvfb
+  - sudo apt-get install -qq libtiff4-dev libjpeg8-dev libfreetype6-dev liblcms1-dev libwebp-dev
+  - sudo apt-get install -qq graphviz-dev python-setuptools python3-dev python-virtualenv python-pip
+  - sudo apt-get install -qq firefox automake libtool libreadline6 libreadline6-dev libreadline-dev
+  - sudo apt-get install -qq libsqlite3-dev libxml2 libxml2-dev libssl-dev libbz2-dev wget curl llvm
+language: python
+python:
+  - "3.7"
+
+cache:
+  - pip
+  - apt
+  
+services:
+  - postgresql
+  - redis-server
+addons:
+  postgresql: "10"
+
+env:
+  global:
+  - PGPORT=5433
+  - DATABASE_URL="postgres://testuser:testuser@127.0.0.1:5432/testdb"
+  - REDIS_URL="redis://127.0.0.1:6379"
+  - DJANGO_ADMIN_URL="admin/"
+  - DJANGO_ALLOWED_HOSTS="127.0.0.1"
+  - DJANGO_DEBUG="True"
+  - DJANGO_SENTRY_ENVIRONMENT="test"
+  - DJANGO_SETTINGS_MODULE="config.settings.test"
+  - PYTHONHASHSEED="random"
+
+before_script:
+  - psql -c "CREATE USER testuser WITH PASSWORD 'testuser';" -U postgres
+  - psql -c "CREATE DATABASE testdb;" -U postgres
+  - psql -c "CREATE USER testuser WITH ENCRYPTED PASSWORD 'testuser';" -U postgres
+  - psql -c "GRANT ALL PRIVILEGES ON DATABASE test_db TO testuser;" -U postgres
+  - pip install -r requirements/production.txt -r requirements/local.txt
+
+
+script:
+  - echo "foobar"
+  - python -V
+  - django-admin --version
+
