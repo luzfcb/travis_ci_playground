@@ -32,33 +32,34 @@ addons:
     - postgresql-10
     - postgresql-client-10
     - build-essential
-    - gettext
-    - zlib1g-dev
     - libpq-dev
-    - xvfb
-    - libtiff5-dev
-    - libjpeg8-dev
-    - libfreetype6-dev
-    - liblcms2-dev
-    - libwebp-dev
-    - graphviz-dev
-    - python-setuptools
-    - python3-dev
-    - python-virtualenv
-    - python-pip
-    - automake
-    - libtool
-    - libreadline6
-    - libreadline6-dev
-    - libreadline-dev
-    - libsqlite3-dev
-    - libxml2
-    - libxml2-dev
-    - libssl-dev
-    - libbz2-dev
-    - wget
-    - curl
-    - llvm
+    #- xvfb
+    #- gettext
+    #- zlib1g-dev
+    #- xvfb
+    #- libtiff5-dev
+    #- libjpeg8-dev
+    #- libfreetype6-dev
+    #- liblcms2-dev
+    #- libwebp-dev
+    #- graphviz-dev
+    #- python-setuptools
+    #- python3-dev
+    #- python-virtualenv
+    #- python-pip
+    #- automake
+    #- libtool
+    #- libreadline6
+    #- libreadline6-dev
+    #- libreadline-dev
+    #- libsqlite3-dev
+    #- libxml2
+    #- libxml2-dev
+    #- libssl-dev
+    #- libbz2-dev
+    #- wget
+    #- curl
+    #- llvm
 
   
 env:
