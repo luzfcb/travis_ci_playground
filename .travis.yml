@@ -47,7 +47,7 @@ env:
 before_script:
   - psql -c "CREATE USER testuser WITH PASSWORD 'testuser';" -U postgres
   - psql -c "CREATE DATABASE testdb;" -U postgres
-  - psql -c "GRANT ALL PRIVILEGES ON DATABASE test_db TO testuser;" -U postgres
+  - psql -c "GRANT ALL PRIVILEGES ON DATABASE testdb TO testuser;" -U postgres
   
 script:
   - echo "foobar"
