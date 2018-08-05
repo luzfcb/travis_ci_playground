@@ -1,5 +1,9 @@
 dist: xenial
 sudo: true
+language: python
+python:
+  - "3.7"
+
 before_install:
   - sudo apt-get update -qq
   - sudo apt-get install -qq build-essential gettext python-dev zlib1g-dev libpq-dev xvfb
@@ -7,9 +11,9 @@ before_install:
   - sudo apt-get install -qq graphviz-dev python-setuptools python3-dev python-virtualenv python-pip
   - sudo apt-get install -qq firefox automake libtool libreadline6 libreadline6-dev libreadline-dev
   - sudo apt-get install -qq libsqlite3-dev libxml2 libxml2-dev libssl-dev libbz2-dev wget curl llvm
-language: python
-python:
-  - "3.7"
+
+install:
+  - pip install -r requirements/production.txt -r requirements/local.txt
 
 cache:
   - pip
@@ -18,9 +22,14 @@ cache:
 services:
   - postgresql
   - redis-server
+
 addons:
   postgresql: "10"
-
+  apt:
+    packages:
+    - postgresql-10
+    - postgresql-client-10
+  
 env:
   global:
   - PGPORT=5433
@@ -38,9 +47,7 @@ before_script:
   - psql -c "CREATE DATABASE testdb;" -U postgres
   - psql -c "CREATE USER testuser WITH ENCRYPTED PASSWORD 'testuser';" -U postgres
   - psql -c "GRANT ALL PRIVILEGES ON DATABASE test_db TO testuser;" -U postgres
-  - pip install -r requirements/production.txt -r requirements/local.txt
-
-
+  
 script:
   - echo "foobar"
   - python -V
