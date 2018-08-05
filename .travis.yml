@@ -11,8 +11,8 @@ before_install:
   - sudo apt-get install -qq graphviz-dev python-setuptools python3-dev python-virtualenv python-pip
   - sudo apt-get install -qq firefox automake libtool libreadline6 libreadline6-dev libreadline-dev
   - sudo apt-get install -qq libsqlite3-dev libxml2 libxml2-dev libssl-dev libbz2-dev wget curl llvm
-#  - sudo /etc/init.d/postgresql stop
-#  - sudo /etc/init.d/postgresql start 10
+  - sudo /etc/init.d/postgresql stop
+  - sudo /etc/init.d/postgresql start 10
 
 install:
   - pip install -r requirements/production.txt -r requirements/local.txt
@@ -26,15 +26,15 @@ services:
   - redis-server
 
 addons:
-  postgresql: "9.6"
+  postgresql: "10"
   apt:
     packages:
-    - postgresql-9.6
-    - postgresql-client-9.6
+    - postgresql-10
+    - postgresql-client-10
   
 env:
   global:
-  - PGPORT=5433
+  - PGPORT=5432
   - DATABASE_URL="postgres://testuser:testuser@127.0.0.1:5432/testdb"
   - REDIS_URL="redis://127.0.0.1:6379"
   - DJANGO_ADMIN_URL="admin/"
