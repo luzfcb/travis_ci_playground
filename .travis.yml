@@ -41,7 +41,7 @@ env:
   - DJANGO_ALLOWED_HOSTS="127.0.0.1"
   - DJANGO_DEBUG="True"
   - DJANGO_SENTRY_ENVIRONMENT="test"
-  - DJANGO_SETTINGS_MODULE="config.settings.test"
+#  - DJANGO_SETTINGS_MODULE="config.settings.test"
   - PYTHONHASHSEED="random"
 
 before_script:
